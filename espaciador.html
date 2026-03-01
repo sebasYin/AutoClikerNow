@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoClickerNow - Barra Espaciadora</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg:#ffffff; --card:#ffffff; --text:#222; --primary:#4f46e5;
+    --header-footer:#D8CFC0; --time-green:#28a745; --time-green-dark:#19692c;
+    --click-zone-bg:#e0e0e0; --click-zone-active:#c0c0c0;
+}
+.dark {
+    --bg:#121212; --card:#1e1e1e; --text:#f5f5f5; --primary:#818cf8;
+    --header-footer:#333; --time-green:#28a745; --time-green-dark:#19692c;
+    --click-zone-bg:#2a2a2a; --click-zone-active:#444;
+}
+body{margin:0;font-family:"Poppins",sans-serif;background:var(--bg);color:var(--text);transition:0.3s;}
+header{background:var(--header-footer);display:flex;justify-content:space-between;align-items:center;padding:15px 30px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header .logo{font-size:22px;font-weight:700;margin-right:15px;cursor:default;}
+header .nav-buttons button,.nav-style-btn{margin:0 5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:var(--primary);color:white;transition:0.2s;font-size:16px;}
+header .nav-buttons button:hover,.nav-style-btn:hover{transform:scale(1.05);}
+.container{width:90%;max-width:1300px;margin:20px auto;}
+.title{font-size:28px;font-weight:700;text-align:center;margin-bottom:10px;}
+.description{text-align:center;opacity:0.85;margin-bottom:20px;}
+.main-content{display:flex;justify-content:center;align-items:flex-start;gap:30px;flex-wrap:wrap;}
+.left-panel{flex:1;min-width:500px;display:flex;flex-direction:column;align-items:center;}
+.right-panel{width:200px;background:var(--time-green-dark);border-radius:20px;padding:20px;color:white;text-align:center;}
+.right-panel h3{margin-top:0;margin-bottom:15px;}
+.time-table td{padding:12px;text-align:center;font-weight:600;cursor:pointer;background:var(--time-green);transition:0.3s;border-radius:12px;}
+.time-table td:hover{background:var(--time-green-dark);transform:scale(1.05);}
+.time-table td.active{background:var(--primary);}
+.stats-table{border-collapse:collapse;width:100%;max-width:550px;margin:0 auto 20px;}
+.stats-table th,.stats-table td{border:1px solid #ccc;padding:10px;text-align:center;border-radius:8px;}
+.stats-table th{background:#79C3F5;color:white;}
+.click-zone{width:600px;height:80px;background:var(--click-zone-bg);border-radius:30px;display:flex;justify-content:center;align-items:center;cursor:default;font-size:22px;font-weight:700;text-align:center;transition:0.2s;user-select:none;margin-bottom:20px;}
+.click-zone:active{background:var(--click-zone-active);}
+.leaderboard{margin-top:20px;width:100%;max-width:650px;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center;}
+.leaderboard h3{background:var(--primary);color:white;margin:0;padding:12px;}
+.leaderboard-table{width:100%;border-collapse:collapse;}
+.leaderboard-table th,.leaderboard-table td{border:1px solid #ccc;padding:10px;text-align:center;}
+button#downloadBtn, button#clearBtn, button#resetBtn{margin-top:10px;padding:10px 25px;font-size:16px;border:none;border-radius:12px;cursor:pointer;transition:0.2s;}
+#downloadBtn{background:#28a745;color:white;}
+#clearBtn{background:#e63946;color:white;}
+#resetBtn{background:var(--primary);color:white;display:none;}
+button:hover{transform:scale(1.05);}
+.cps-info{max-width:900px;margin:30px auto;background:var(--card);border-radius:15px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.cps-info h3{margin-top:0;color:var(--primary);}
+footer{background:var(--header-footer);display:flex;justify-content:center;gap:15px;padding:12px 0;font-size:14px;}
+footer a{text-decoration:none;color:var(--text);}
+footer a:hover{text-decoration:underline;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:1000;}
+.modal-content{background:var(--bg);padding:40px;border-radius:20px;width:450px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+</style>
+</head>
+<body>
+
+<header>
+<div style="display:flex;align-items:center;">
+  <div class="logo">AutoClickerNow</div>
+  <div class="nav-buttons">
+    <button onclick="location.href='clics.html'">Ratón Test</button>
+    <button onclick="location.href='contador.html'">Contador de botones</button>
+    <button onclick="location.href='espaciador.html'">Barra Espaciadora</button>
+  </div>
+</div>
+<div>
+  <button id="configBtn" class="nav-style-btn">⚙️ Configuración</button>
+</div>
+</header>
+
+<div class="container">
+  <div class="title" id="titlePage">AutoClickerNow - Barra Espaciadora</div>
+  <div class="description" id="descPage">Mide cuántas veces puedes pulsar la barra espaciadora por segundo</div>
+
+  <div class="main-content">
+    <div class="left-panel">
+      <table class="stats-table">
+        <tr><th id="thPresses">Pulsaciones</th><th id="thCPS">CPS</th><th id="thTime">Tiempo</th></tr>
+        <tr><td id="presses">0</td><td id="cps">0</td><td id="tiempo">0</td></tr>
+      </table>
+
+      <div class="click-zone" id="clickZone">Presiona la barra espaciadora para empezar</div>
+
+      <div class="leaderboard">
+        <h3 id="lbTitle">Tus Registros</h3>
+        <table class="leaderboard-table" id="leaderboardTable">
+          <tr><th>Pulsaciones</th><th>CPS</th><th>Tiempo</th></tr>
+        </table>
+        <button id="downloadBtn">Descargar tu lista</button>
+        <button id="clearBtn">Borrar historial</button>
+      </div>
+
+      <button id="resetBtn">Comenzar de nuevo</button>
+    </div>
+
+    <div class="right-panel">
+      <h3 id="timesTitle">Tiempos</h3>
+      <table class="time-table" id="timeTable">
+        <tr><td data-time="5">5 SEGUNDOS</td></tr>
+        <tr><td data-time="10">10 SEGUNDOS</td></tr>
+        <tr><td data-time="15">15 SEGUNDOS</td></tr>
+        <tr><td data-time="30">30 SEGUNDOS</td></tr>
+        <tr><td data-time="60">60 SEGUNDOS</td></tr>
+        <tr><td data-time="100">100 SEGUNDOS</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cps-info">
+    <h3 id="infoTitle1">¿Qué es la prueba de Barra Espaciadora?</h3>
+    <p id="infoText1">
+      Esta prueba mide cuántas veces puedes pulsar la barra espaciadora en un tiempo determinado. Es útil para evaluar reflejos y coordinación mano-ojo.
+    </p>
+
+    <h3 id="infoTitle2">Cómo usarla</h3>
+    <ol>
+      <li id="infoStep1">Selecciona el tiempo de prueba.</li>
+      <li id="infoStep2">Pulsa la barra espaciadora lo más rápido que puedas hasta que el contador llegue a cero.</li>
+      <li id="infoStep3">Al finalizar, verás tu CPS y el total de pulsaciones.</li>
+      <li id="infoStep4">Vuelve a intentarlo con 'Comenzar de nuevo' para mejorar tu marca.</li>
+    </ol>
+  </div>
+</div>
+
+<footer>
+  <span>© SebasYin</span>
+  <a href="terminos.html">Términos de uso</a>
+  <a href="privacidad.html">Política de privacidad</a>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle">Configuración</h2>
+    <label for="idiomaSelect" id="labelIdioma">Cambiar idioma:</label>
+    <select id="idiomaSelect">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
+    <label>
+      <input type="checkbox" id="modoOscuroCheck"> Modo oscuro
+    </label>
+    <button id="closeModalBtn">Cerrar</button>
+  </div>
+</div>
+
+<script>
+// =================== Lógica Barra Espaciadora ===================
+document.addEventListener("DOMContentLoaded", () => {
+  let presses = 0, cps = 0, elapsed = 0, duration = 5, interval;
+  const pressesDisplay = document.getElementById("presses");
+  const cpsDisplay = document.getElementById("cps");
+  const tiempoDisplay = document.getElementById("tiempo");
+  const resetBtn = document.getElementById("resetBtn");
+  const leaderboardTable = document.getElementById("leaderboardTable");
+  const downloadBtn = document.getElementById("downloadBtn");
+  const clearBtn = document.getElementById("clearBtn");
+  const clickZone = document.getElementById("clickZone");
+
+  // Selección de tiempo
+  const timeCells = document.querySelectorAll("#timeTable td");
+  timeCells.forEach(c => {
+    c.onclick = () => {
+      duration = parseInt(c.dataset.time);
+      timeCells.forEach(tc => tc.classList.remove("active"));
+      c.classList.add("active");
+    };
+  });
+  timeCells[0].classList.add("active");
+
+  // Cargar registros previos
+  let savedRecords = JSON.parse(localStorage.getItem("espRecords") || "[]");
+  function render() {
+    leaderboardTable.innerHTML = "<tr><th>Pulsaciones</th><th>CPS</th><th>Tiempo</th></tr>";
+    savedRecords.forEach(r => {
+      const row = leaderboardTable.insertRow();
+      row.insertCell(0).textContent = r.presses;
+      row.insertCell(1).textContent = r.cps;
+      row.insertCell(2).textContent = r.time;
+    });
+  }
+  render();
+
+  function resetTest() {
+    presses = 0;
+    cps = 0;
+    elapsed = 0;
+    clearInterval(interval);
+    pressesDisplay.textContent = 0;
+    cpsDisplay.textContent = 0;
+    tiempoDisplay.textContent = 0;
+    resetBtn.style.display = "none";
+    clickZone.textContent = "Presiona la barra espaciadora para empezar";
+  }
+
+  function startTest() {
+    interval = setInterval(() => {
+      elapsed += 0.1;
+      tiempoDisplay.textContent = elapsed.toFixed(1);
+      cps = (presses / elapsed).toFixed(2);
+      pressesDisplay.textContent = presses;
+      cpsDisplay.textContent = cps;
+      if (elapsed >= duration) {
+        clearInterval(interval);
+        resetBtn.style.display = "block";
+        const r = { presses: presses, cps: cps, time: duration };
+        savedRecords.push(r);
+        localStorage.setItem("espRecords", JSON.stringify(savedRecords));
+        render();
+      }
+    }, 100);
+  }
+
+  // Detectar barra espaciadora
+  document.addEventListener("keydown", (e) => {
+    if (e.code === "Space") {
+      if (elapsed === 0) startTest();
+      if (elapsed < duration) {
+        presses++;
+      }
+      e.preventDefault();
+    }
+  });
+
+  resetBtn.onclick = resetTest;
+
+  downloadBtn.onclick = () => {
+    let csv = "data:text/csv;charset=utf-8,Pulsaciones,CPS,Tiempo\n";
+    savedRecords.forEach(r => csv += `${r.presses},${r.cps},${r.time}\n`);
+    const link = document.createElement("a");
+    link.href = encodeURI(csv);
+    link.download = "registros_espaciadora.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  clearBtn.onclick = () => {
+    if (confirm("¿Seguro que deseas borrar todo el historial?")) {
+      savedRecords = [];
+      localStorage.removeItem("espRecords");
+      render();
+    }
+  };
+});
+</script>
+
+</body>
+</html>

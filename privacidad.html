@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Política de privacidad - AutoClikerNow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg:#ffffff; --card:#ffffff; --text:#222; --primary:#4f46e5;
+    --header-footer:#D8CFC0; --link-color:#4f46e5;
+}
+.dark {
+    --bg:#121212; --card:#1e1e1e; --text:#f5f5f5; --primary:#818cf8;
+    --header-footer:#333; --link-color:#818cf8;
+}
+body{margin:0;font-family:"Poppins",sans-serif;background:var(--bg);color:var(--text);transition:0.3s;}
+header{background:var(--header-footer);display:flex;justify-content:space-between;align-items:center;padding:15px 30px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header .logo{font-weight:700;font-size:20px;color:var(--primary);margin-right:15px;}
+header button{margin:0 5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:var(--primary);color:white;transition:0.2s;font-size:16px;}
+header button:hover{transform:scale(1.05);}
+.container{width:90%;max-width:900px;margin:30px auto;}
+h1,h2,h3{color:var(--primary);}
+p,li{line-height:1.6;margin-bottom:10px;}
+ul,ol{margin-left:20px;}
+footer{background:var(--header-footer);display:flex;justify-content:center;gap:15px;padding:12px 0;font-size:14px;}
+footer a{text-decoration:none;color:var(--text);}
+footer a:hover{text-decoration:underline;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:1000;}
+.modal-content{background:var(--bg);padding:40px;border-radius:20px;width:450px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+.modal-content h2{margin-top:0;margin-bottom:20px;}
+.modal-content select,.modal-content input[type="checkbox"]{margin-bottom:20px;padding:10px;font-size:16px;}
+.modal-content button{margin-top:10px;padding:10px 20px;font-size:16px;background:var(--primary);color:white;border:none;border-radius:10px;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+    <div style="display:flex; align-items:center;">
+        <span class="logo">AutoClikerNow</span>
+        <button onclick="location.href='clics.html'">Clics Test</button>
+        <button onclick="location.href='contador.html'">Contador</button>
+        <button onclick="location.href='espaciador.html'">Barra Espaciadora</button>
+    </div>
+    <div>
+        <button id="configBtn">⚙️ Configuración</button>
+    </div>
+</header>
+
+<div class="container">
+    <h1 id="titlePage">Política de privacidad</h1>
+
+    <p id="introText">Nos comprometemos a proteger tu privacidad. Esta política describe cómo recopilamos, usamos y protegemos tu información al utilizar nuestro sitio web.</p>
+
+    <h2 id="section1">Información que recopilamos</h2>
+    <p id="text1">Podemos recopilar información personal como tu dirección de correo electrónico si decides contactarnos, así como información técnica sobre tu navegador y dispositivo para mejorar la experiencia del sitio.</p>
+
+    <h2 id="section2">Uso de la información</h2>
+    <p id="text2">La información recopilada se utiliza únicamente para mejorar el sitio web, responder a tus consultas y asegurar un funcionamiento adecuado de nuestros servicios.</p>
+
+    <h2 id="section3">Compartir información</h2>
+    <p id="text3">No vendemos, intercambiamos ni compartimos información personal con terceros, excepto si la ley nos obliga a hacerlo o para proteger nuestros derechos legales.</p>
+
+    <h2 id="section4">Cookies y tecnologías similares</h2>
+    <p id="text4">Podemos utilizar cookies y otras tecnologías para mejorar la experiencia del usuario, analizar tendencias y administrar el sitio web. Puedes desactivar las cookies desde tu navegador si lo deseas.</p>
+
+    <h2 id="section5">Seguridad</h2>
+    <p id="text5">Implementamos medidas razonables para proteger la información que recopilamos, pero no podemos garantizar la seguridad absoluta de los datos transmitidos a través de Internet.</p>
+
+    <h2 id="section6">Enlaces a otros sitios</h2>
+    <p id="text6">Nuestro sitio puede contener enlaces a sitios externos. No somos responsables de las prácticas de privacidad ni del contenido de esos sitios.</p>
+
+    <h2 id="section7">Cambios en la política</h2>
+    <p id="text7">Podemos actualizar esta política de privacidad periódicamente. Los cambios se publicarán en esta página y entrarán en vigor inmediatamente.</p>
+
+    <h2 id="section8">Contacto</h2>
+    <p id="text8">Para cualquier pregunta sobre esta política de privacidad, puedes contactarnos en <strong>info@website.com</strong> o mediante nuestro formulario de contacto.</p>
+</div>
+
+<footer>
+    <span>© SebasYin</span>
+    <a href="terminos.html">Términos de uso</a>
+    <a href="privacidad.html">Política de privacidad</a>
+</footer>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Configuración</h2>
+        <label for="idiomaSelect" id="labelIdioma">Cambiar idioma:</label>
+        <select id="idiomaSelect">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+        <label>
+            <input type="checkbox" id="modoOscuroCheck"> Modo oscuro
+        </label>
+        <button id="closeModalBtn">Cerrar</button>
+    </div>
+</div>
+
+<script>
+const texts={
+es:{
+titlePage:"Política de privacidad",
+introText:"Nos comprometemos a proteger tu privacidad. Esta política describe cómo recopilamos, usamos y protegemos tu información al utilizar nuestro sitio web.",
+section1:"Información que recopilamos", text1:"Podemos recopilar información personal como tu dirección de correo electrónico si decides contactarnos, así como información técnica sobre tu navegador y dispositivo para mejorar la experiencia del sitio.",
+section2:"Uso de la información", text2:"La información recopilada se utiliza únicamente para mejorar el sitio web, responder a tus consultas y asegurar un funcionamiento adecuado de nuestros servicios.",
+section3:"Compartir información", text3:"No vendemos, intercambiamos ni compartimos información personal con terceros, excepto si la ley nos obliga a hacerlo o para proteger nuestros derechos legales.",
+section4:"Cookies y tecnologías similares", text4:"Podemos utilizar cookies y otras tecnologías para mejorar la experiencia del usuario, analizar tendencias y administrar el sitio web. Puedes desactivar las cookies desde tu navegador si lo deseas.",
+section5:"Seguridad", text5:"Implementamos medidas razonables para proteger la información que recopilamos, pero no podemos garantizar la seguridad absoluta de los datos transmitidos a través de Internet.",
+section6:"Enlaces a otros sitios", text6:"Nuestro sitio puede contener enlaces a sitios externos. No somos responsables de las prácticas de privacidad ni del contenido de esos sitios.",
+section7:"Cambios en la política", text7:"Podemos actualizar esta política de privacidad periódicamente. Los cambios se publicarán en esta página y entrarán en vigor inmediatamente.",
+section8:"Contacto", text8:"Para cualquier pregunta sobre esta política de privacidad, puedes contactarnos en info@website.com o mediante nuestro formulario de contacto.",
+modalTitle:"Configuración", labelIdioma:"Cambiar idioma:", closeModalBtn:"Cerrar"
+},
+en:{
+titlePage:"Privacy Policy",
+introText:"We are committed to protecting your privacy. This policy describes how we collect, use, and safeguard your information when using our website.",
+section1:"Information We Collect", text1:"We may collect personal information such as your email address if you choose to contact us, as well as technical information about your browser and device to improve site experience.",
+section2:"Use of Information", text2:"The collected information is used solely to improve the website, respond to your inquiries, and ensure proper functioning of our services.",
+section3:"Sharing Information", text3:"We do not sell, trade, or share personal information with third parties, except as required by law or to protect our legal rights.",
+section4:"Cookies and Similar Technologies", text4:"We may use cookies and other technologies to enhance user experience, analyze trends, and manage the website. You can disable cookies from your browser if desired.",
+section5:"Security", text5:"We implement reasonable measures to protect the information we collect, but cannot guarantee absolute security of data transmitted over the Internet.",
+section6:"Links to Other Sites", text6:"Our site may contain links to external websites. We are not responsible for the privacy practices or content of those sites.",
+section7:"Policy Changes", text7:"We may update this privacy policy periodically. Changes will be posted on this page and take effect immediately.",
+section8:"Contact", text8:"For any questions regarding this privacy policy, you can contact us at info@website.com or via our contact form.",
+modalTitle:"Settings", labelIdioma:"Change Language:", closeModalBtn:"Close"
+},
+fr:{
+titlePage:"Politique de confidentialité",
+introText:"Nous nous engageons à protéger votre vie privée. Cette politique décrit comment nous collectons, utilisons et protégeons vos informations lors de l'utilisation de notre site web.",
+section1:"Informations que nous recueillons", text1:"Nous pouvons collecter des informations personnelles telles que votre adresse e-mail si vous décidez de nous contacter, ainsi que des informations techniques sur votre navigateur et appareil pour améliorer l'expérience du site.",
+section2:"Utilisation des informations", text2:"Les informations collectées sont utilisées uniquement pour améliorer le site Web, répondre à vos demandes et garantir le bon fonctionnement de nos services.",
+section3:"Partage des informations", text3:"Nous ne vendons, échangeons ni ne partageons d'informations personnelles avec des tiers, sauf si la loi nous y oblige ou pour protéger nos droits légaux.",
+section4:"Cookies et technologies similaires", text4:"Nous pouvons utiliser des cookies et autres technologies pour améliorer l'expérience utilisateur, analyser les tendances et gérer le site Web. Vous pouvez désactiver les cookies depuis votre navigateur si vous le souhaitez.",
+section5:"Sécurité", text5:"Nous mettons en œuvre des mesures raisonnables pour protéger les informations que nous recueillons, mais nous ne pouvons garantir la sécurité absolue des données transmises via Internet.",
+section6:"Liens vers d'autres sites", text6:"Notre site peut contenir des liens vers des sites externes. Nous ne sommes pas responsables des pratiques de confidentialité ni du contenu de ces sites.",
+section7:"Modifications de la politique", text7:"Nous pouvons mettre à jour cette politique de confidentialité périodiquement. Les changements seront publiés sur cette page et prendront effet immédiatement.",
+section8:"Contact", text8:"Pour toute question concernant cette politique de confidentialité, vous pouvez nous contacter à info@website.com ou via notre formulaire de contact.",
+modalTitle:"Paramètres", labelIdioma:"Changer la langue:", closeModalBtn:"Fermer"
+}
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const idiomaSelect=document.getElementById("idiomaSelect");
+    const modoCheck=document.getElementById("modoOscuroCheck");
+    const modal=document.getElementById("modal");
+    const configBtn=document.getElementById("configBtn");
+    const closeModalBtn=document.getElementById("closeModalBtn");
+    let idioma=localStorage.getItem("idioma")||"es";
+    let darkMode=localStorage.getItem("darkMode")==="true";
+
+    function aplicarIdioma(){
+        const t=texts[idioma];
+        for(let key in t){
+            if(document.getElementById(key)) document.getElementById(key).textContent=t[key];
+        }
+    }
+
+    aplicarIdioma();
+    idiomaSelect.value=idioma;
+    modoCheck.checked=darkMode;
+    if(darkMode) document.body.classList.add("dark");
+
+    idiomaSelect.onchange=()=>{idioma=idiomaSelect.value; localStorage.setItem("idioma",idioma); aplicarIdioma();}
+    modoCheck.onchange=()=>{document.body.classList.toggle("dark"); localStorage.setItem("darkMode",modoCheck.checked);}
+    configBtn.onclick=()=>modal.style.display="flex";
+    closeModalBtn.onclick=()=>modal.style.display="none";
+    window.onclick=e=>{if(e.target===modal) modal.style.display="none";}
+});
+</script>
+
+</body>
+</html>

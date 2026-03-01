@@ -1,0 +1,268 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Autocliker- SebasYin: Contador, Test de Ratón y Más Herramientas Online</title>
+<meta name="description" content="Autocliker-SebasYin ofrece herramientas online gratuitas como contador de unidades, test de velocidad de clics y pulsador de barra espaciadora. ¡Fácil de usar y con guardado automático!">
+<meta name="keywords" content="autoclicker, contador, contador online, test de raton, test de clics, barra espaciadora, herramientas online, sebasin">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg: #ffffff;
+    --card: #ffffff;
+    --text: #222;
+    --primary: #4f46e5;
+    --header-footer: #D8CFC0;
+    --contador-bg: #79C3F5;
+}
+.dark {
+    --bg: #121212;
+    --card: #1e1e1e;
+    --text: #f5f5f5;
+    --primary: #818cf8;
+    --header-footer: #333;
+    --contador-bg: #3A7BBF;
+}
+body { margin:0; font-family:"Poppins",sans-serif; background:var(--bg); color:var(--text); transition:0.3s; }
+header { background: var(--header-footer); display:flex; justify-content:space-between; align-items:center; padding:15px 30px; box-shadow:0 4px 6px rgba(0,0,0,0.1); }
+header .title-left { font-size:22px; font-weight:700; margin-right:15px; }
+header button { margin:0 5px; padding:10px 16px; border:none; border-radius:8px; cursor:pointer; font-weight:600; background:var(--primary); color:white; transition:0.2s; font-size:16px; }
+header button:hover { transform:scale(1.05); }
+.table-container { width:80%; margin:20px auto; border-collapse:collapse; }
+.table-container td { text-align:center; padding:15px; }
+.title-table { font-size:26px; font-weight:700; margin-bottom:5px; }
+.description-table { font-size:16px; opacity:0.85; }
+.counter-table { background:var(--contador-bg); border-radius:20px; padding:40px; margin-top:20px; box-shadow:0 8px 20px rgba(0,0,0,0.1); }
+#contador { font-size:120px; font-weight:700; margin:30px 0; text-align:center; color:white; }
+button.counter-btn { padding:18px 30px; font-size:20px; background:var(--primary); color:white; border-radius:10px; margin:0 8px; }
+.info-table td { text-align:left; padding:25px; background:#f4f7fb; border-radius:15px; box-shadow:0 4px 15px rgba(0,0,0,0.05); }
+.info-table h3 { margin-bottom:10px; color:var(--primary); }
+.info-table p { margin-bottom:15px; line-height:1.5; }
+footer { background:var(--header-footer); display:flex; justify-content:center; gap:15px; padding:12px 0; font-size:14px; box-shadow:0 -2px 6px rgba(0,0,0,0.05); }
+footer a { color:var(--text); text-decoration:none; }
+footer a:hover { text-decoration:underline; }
+
+/* Modal */
+.modal { display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); justify-content:center; align-items:center; z-index:1000; }
+.modal-content { background:var(--card); color:var(--text); padding:40px; border-radius:20px; width:500px; text-align:center; box-shadow:0 8px 25px rgba(0,0,0,0.2); }
+.modal-content h2 { margin-top:0; margin-bottom:20px; font-size:26px; }
+.modal-content label { display:block; margin:10px 0 5px; text-align:left; font-weight:600; }
+.modal-content select { padding:10px; font-size:16px; width:70%; margin-right:10px; }
+.modal-content button { margin-top:10px; padding:10px 20px; font-size:16px; border:none; border-radius:10px; cursor:pointer; }
+#confirmIdiomaBtn { background:#28a745; color:white; }
+#cerrarBtn { background:var(--primary); color:white; }
+.modal-content .modo-oscuro { text-align:left; margin-top:15px; }
+</style>
+</head>
+<body>
+
+<header>
+    <div style="display:flex; align-items:center;">
+        <div class="title-left">AutoclikerNow</div>
+        <div class="left-buttons">
+            <button id="btnContador">Contador de botones</button>
+            <button id="btnRaton">Ratón Test</button>
+            <button id="btnBarra">Barra Espaciadora</button>
+        </div>
+    </div>
+    <div class="right-buttons">
+        <button id="configBtn">⚙️ Configuración</button>
+    </div>
+</header>
+
+<table class="table-container">
+<tr>
+    <td>
+        <div class="title-table" id="titulo">Contador de Unidades</div>
+        <div class="description-table" id="descripcion">Una herramienta para sumar o restar unidades fácilmente</div>
+    </td>
+</tr>
+</table>
+
+<table class="table-container counter-table">
+<tr>
+    <td>
+        <div id="contador">0</div>
+        <button id="sumar" class="counter-btn">Aumentar</button>
+        <button id="restar" class="counter-btn">Disminuir</button>
+        <button id="reset" class="counter-btn">Restablecer</button>
+    </td>
+</tr>
+</table>
+
+<table class="table-container info-table">
+<tr>
+    <td>
+        <h3 id="info1_title">¿Qué es este contador?</h3>
+        <p id="info1_text">Un contador digital que puedes usar desde cualquier dispositivo para registrar unidades de forma rápida y confiable.</p>
+
+        <h3 id="info2_title">¿Para qué sirve?</h3>
+        <p id="info2_text">Ideal para eventos, pasos, juegos, tareas industriales o cualquier actividad que requiera sumar o restar valores de manera precisa.</p>
+
+        <h3 id="info3_title">Cómo usarlo</h3>
+        <p id="info3_text">Presiona Aumentar (+) para incrementar, Disminuir (-) para decrementar y Restablecer para poner a cero. Puedes cambiar idioma o modo oscuro desde configuración.</p>
+
+        <h3 id="info4_title">Beneficios</h3>
+        <p id="info4_text">Es rápido, preciso y accesible desde cualquier navegador. No necesitas papel y se guarda automáticamente en tu dispositivo.</p>
+
+        <h3 id="info5_title">Guardar la cuenta</h3>
+        <p id="info5_text">El contador guarda automáticamente el valor usando el navegador. Si cierras la página y vuelves, tu conteo se conservará.</p>
+    </td>
+</tr>
+</table>
+
+<footer>
+    <span id="autor">© SebasYin</span> |
+    <a href="terminos.html" id="terminos">Términos de Uso</a> |
+    <a href="privacidad.html" id="privacidad">Política de Privacidad</a>
+</footer>
+
+<div class="modal" id="modal">
+<div class="modal-content">
+    <h2 id="config-title">Configuración</h2>
+
+    <label for="idiomaSelect" id="config_idioma_label">Cambiar Idioma:</label>
+    <div style="display:flex; align-items:center; justify-content:center;">
+        <select id="idiomaSelect">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+        <button id="confirmIdiomaBtn">Confirmar</button>
+    </div>
+
+    <div class="modo-oscuro">
+        <label>
+            <input type="checkbox" id="modoOscuroCheck"> Modo Oscuro
+        </label>
+    </div>
+
+    <button id="cerrarBtn">Cerrar</button>
+</div>
+</div>
+
+<script>
+window.onload = () => {
+    let contador = localStorage.getItem("contador") ? parseInt(localStorage.getItem("contador")) : 0;
+    const contadorElemento = document.getElementById("contador");
+    function actualizar() { 
+        contadorElemento.textContent = contador; 
+        localStorage.setItem("contador", contador); 
+    }
+    actualizar();
+
+    document.getElementById("sumar").onclick = () => { contador++; actualizar(); };
+    document.getElementById("restar").onclick = () => { contador--; actualizar(); };
+    document.getElementById("reset").onclick = () => { contador=0; actualizar(); };
+
+    const modal = document.getElementById("modal");
+    const configBtn = document.getElementById("configBtn");
+    const cerrarBtn = document.getElementById("cerrarBtn");
+    const idiomaSelect = document.getElementById("idiomaSelect");
+    const confirmBtn = document.getElementById("confirmIdiomaBtn");
+    const modoCheck = document.getElementById("modoOscuroCheck");
+
+    configBtn.onclick = () => {
+        modal.style.display = "flex";
+        idiomaSelect.value = localStorage.getItem("idioma") || "es";
+        modoCheck.checked = document.body.classList.contains("dark");
+    }
+    cerrarBtn.onclick = () => modal.style.display = "none";
+
+    let idioma = localStorage.getItem("idioma") || "es";
+
+    const texts = {
+        es: {
+            titulo:"Contador de Unidades", descripcion:"Una herramienta para sumar o restar unidades fácilmente",
+            sumar:"Aumentar", restar:"Disminuir", reset:"Restablecer",
+            info1_title:"¿Qué es este contador?", info1_text:"Un contador digital que puedes usar desde cualquier dispositivo para registrar unidades de forma rápida y confiable.",
+            info2_title:"¿Para qué sirve?", info2_text:"Ideal para eventos, pasos, juegos, tareas industriales o cualquier actividad que requiera sumar o restar valores de manera precisa.",
+            info3_title:"Cómo usarlo", info3_text:"Presiona Aumentar (+) para incrementar, Disminuir (-) para decrementar y Restablecer para poner a cero. Puedes cambiar idioma o modo oscuro desde configuración.",
+            info4_title:"Beneficios", info4_text:"Es rápido, preciso y accesible desde cualquier navegador. No necesitas papel y se guarda automáticamente en tu dispositivo.",
+            info5_title:"Guardar la cuenta", info5_text:"El contador guarda automáticamente el valor usando el navegador. Si cierras la página y vuelves, tu conteo se conservará.",
+            autor:"© SebasYin", terminos:"Términos de Uso", privacidad:"Política de Privacidad",
+            config_title:"Configuración", config_idioma_label:"Cambiar Idioma:", cerrarBtn:"Cerrar", confirmBtn:"Confirmar",
+            btnContador:"Contador de botones", btnRaton:"Ratón Test", btnBarra:"Barra Espaciadora", configBtn:"⚙️ Configuración"
+        },
+        en: {
+            titulo:"Unit Counter", descripcion:"A tool to add or subtract units easily",
+            sumar:"Increase", restar:"Decrease", reset:"Reset",
+            info1_title:"What is this counter?", info1_text:"A digital counter that you can use from any device to quickly and reliably record units.",
+            info2_title:"What is it for?", info2_text:"Ideal for events, steps, games, industrial tasks, or any activity that requires adding or subtracting values accurately.",
+            info3_title:"How to use it", info3_text:"Press Increase (+) to add, Decrease (-) to subtract, and Reset to set to zero. You can change the language or dark mode from settings.",
+            info4_title:"Benefits", info4_text:"It is fast, accurate, and accessible from any browser. No paper needed and it automatically saves on your device.",
+            info5_title:"Saving the count", info5_text:"The counter automatically saves the value using the browser. If you close the page and return, your count will be preserved.",
+            autor:"© SebasYin", terminos:"Terms of Use", privacidad:"Privacy Policy",
+            config_title:"Settings", config_idioma_label:"Change Language:", cerrarBtn:"Close", confirmBtn:"Confirm",
+            btnContador:"Button Counter", btnRaton:"Mouse Test", btnBarra:"Spacebar", configBtn:"⚙️ Settings"
+        },
+        fr: {
+            titulo:"Compteur d'unités", descripcion:"Un outil pour ajouter ou soustraire des unités facilement",
+            sumar:"Augmenter", restar:"Diminuer", reset:"Réinitialiser",
+            info1_title:"Qu'est-ce que ce compteur ?", info1_text:"Un compteur numérique que vous pouvez utiliser depuis n'importe quel appareil pour enregistrer rapidement et de manière fiable les unités.",
+            info2_title:"À quoi ça sert ?", info2_text:"Idéal pour les événements, les pas, les jeux, les tâches industrielles ou toute activité nécessitant d'ajouter ou de soustraire des valeurs avec précision.",
+            info3_title:"Comment l'utiliser", info3_text:"Appuyez sur Augmenter (+) pour ajouter, Diminuer (-) pour soustraire et Réinitialiser pour remettre à zéro. Vous pouvez également changer la langue ou le mode sombre depuis les paramètres.",
+            info4_title:"Avantages", info4_text:"Rapide, précis et accessible depuis n'importe quel navigateur. Pas besoin de papier et sauvegardé automatiquement sur votre appareil.",
+            info5_title:"Sauvegarder le compteur", info5_text:"Le compteur enregistre automatiquement la valeur dans votre navigateur. Si vous fermez la page et revenez, votre compte sera conservé.",
+            autor:"© SebasYin", terminos:"Conditions d'utilisation", privacidad:"Politique de confidentialité",
+            config_title:"Paramètres", config_idioma_label:"Changer la langue:", cerrarBtn:"Fermer", confirmBtn:"Confirmer",
+            btnContador:"Compteur de boutons", btnRaton:"Test de souris", btnBarra:"Barre d'espace", configBtn:"⚙️ Paramètres"
+        }
+    };
+
+    function aplicarIdioma() {
+        const t = texts[idioma];
+        for (let id in t) {
+            const elem = document.getElementById(id);
+            if(elem) elem.textContent = t[id];
+        }
+    }
+    aplicarIdioma();
+
+    confirmBtn.onclick = () => {
+        idioma = idiomaSelect.value;
+        localStorage.setItem("idioma", idioma);
+        aplicarIdioma();
+    }
+
+    if(localStorage.getItem("modoOscuro") === "true") {
+        document.body.classList.add("dark");
+        modoCheck.checked = true;
+    }
+    modoCheck.onchange = () => {
+        document.body.classList.toggle("dark");
+        localStorage.setItem("modoOscuro", document.body.classList.contains("dark"));
+    }
+
+    // REDIRECCIONES
+    document.getElementById("btnContador").onclick = () => { window.location.href = "contador.html"; };
+    document.getElementById("btnRaton").onclick = () => { window.location.href = "clics.html"; };
+    document.getElementById("btnBarra").onclick = () => { window.location.href = "espaciador.html"; };
+    document.getElementById("terminos").onclick = () => { window.location.href = "terminos.html"; };
+    document.getElementById("privacidad").onclick = () => { window.location.href = "privacidad.html"; };
+
+    window.onclick = (e) => { if(e.target === modal) modal.style.display = "none"; }
+};
+</script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

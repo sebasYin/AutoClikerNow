@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Términos de uso - AutoClikerNow</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --bg:#ffffff; --card:#ffffff; --text:#222; --primary:#4f46e5;
+    --header-footer:#D8CFC0; --link-color:#4f46e5;
+}
+.dark {
+    --bg:#121212; --card:#1e1e1e; --text:#f5f5f5; --primary:#818cf8;
+    --header-footer:#333; --link-color:#818cf8;
+}
+body{margin:0;font-family:"Poppins",sans-serif;background:var(--bg);color:var(--text);transition:0.3s;}
+header{background:var(--header-footer);display:flex;justify-content:space-between;align-items:center;padding:15px 30px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header .logo{font-weight:700;font-size:20px;color:var(--primary);margin-right:15px;}
+header button{margin:0 5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:var(--primary);color:white;transition:0.2s;font-size:16px;}
+header button:hover{transform:scale(1.05);}
+.container{width:90%;max-width:900px;margin:30px auto;}
+h1,h2,h3{color:var(--primary);}
+p,li{line-height:1.6;margin-bottom:10px;}
+ul,ol{margin-left:20px;}
+footer{background:var(--header-footer);display:flex;justify-content:center;gap:15px;padding:12px 0;font-size:14px;}
+footer a{text-decoration:none;color:var(--text);}
+footer a:hover{text-decoration:underline;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:1000;}
+.modal-content{background:var(--bg);padding:40px;border-radius:20px;width:450px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+.modal-content h2{margin-top:0;margin-bottom:20px;}
+.modal-content select,.modal-content input[type="checkbox"]{margin-bottom:20px;padding:10px;font-size:16px;}
+.modal-content button{margin-top:10px;padding:10px 20px;font-size:16px;background:var(--primary);color:white;border:none;border-radius:10px;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<header>
+    <div style="display:flex; align-items:center;">
+        <span class="logo">AutoClikerNow</span>
+        <button onclick="location.href='clics.html'">Clics Test</button>
+        <button onclick="location.href='contador.html'">Contador</button>
+        <button onclick="location.href='espaciador.html'">Barra Espaciadora</button>
+    </div>
+    <div>
+        <button id="configBtn">⚙️ Configuración</button>
+    </div>
+</header>
+
+<div class="container">
+    <h1 id="titlePage">Términos de uso</h1>
+
+    <p id="introText">Bienvenido a nuestro sitio web. Al acceder o utilizar este sitio, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos cuidadosamente.</p>
+
+    <h2 id="section1">Uso del sitio</h2>
+    <p id="text1">El contenido del sitio web se proporciona únicamente con fines informativos y de entretenimiento. No nos hacemos responsables de cómo uses la información disponible en esta página.</p>
+
+    <h2 id="section2">Propiedad intelectual</h2>
+    <p id="text2">Todos los textos, gráficos, logotipos, imágenes y otros materiales presentes en este sitio son propiedad del autor o de terceros que han autorizado su uso. Está prohibida la reproducción total o parcial sin permiso explícito.</p>
+
+    <h2 id="section3">Limitación de responsabilidad</h2>
+    <p id="text3">No garantizamos que el sitio esté libre de errores, virus o interrupciones. En ningún caso seremos responsables de daños directos, indirectos o consecuentes derivados del uso del sitio.</p>
+
+    <h2 id="section4">Modificaciones</h2>
+    <p id="text4">Nos reservamos el derecho de modificar, suspender o interrumpir temporal o permanentemente el sitio web, así como sus términos de uso, sin previo aviso.</p>
+
+    <h2 id="section5">Ley aplicable</h2>
+    <p id="text5">Estos términos se rigen por la legislación vigente en tu país. Cualquier disputa será resuelta en los tribunales competentes.</p>
+
+    <h2 id="section6">Contacto</h2>
+    <p id="text6">Si tienes dudas sobre estos términos de uso, puedes contactarnos a través de nuestro correo electrónico <strong>info@website.com</strong> o mediante nuestro formulario de contacto.</p>
+</div>
+
+<footer>
+    <span>© SebasYin</span>
+    <a href="terminos.html">Términos de uso</a>
+    <a href="privacidad.html">Política de privacidad</a>
+</footer>
+
+<div class="modal" id="modal">
+    <div class="modal-content">
+        <h2 id="modalTitle">Configuración</h2>
+        <label for="idiomaSelect" id="labelIdioma">Cambiar idioma:</label>
+        <select id="idiomaSelect">
+            <option value="es">Español</option>
+            <option value="en">English</option>
+            <option value="fr">Français</option>
+        </select>
+        <label>
+            <input type="checkbox" id="modoOscuroCheck"> Modo oscuro
+        </label>
+        <button id="closeModalBtn">Cerrar</button>
+    </div>
+</div>
+
+<script>
+const texts={
+es:{
+titlePage:"Términos de uso",
+introText:"Bienvenido a nuestro sitio web. Al acceder o utilizar este sitio, aceptas cumplir con los siguientes términos y condiciones. Por favor, léelos cuidadosamente.",
+section1:"Uso del sitio", text1:"El contenido del sitio web se proporciona únicamente con fines informativos y de entretenimiento. No nos hacemos responsables de cómo uses la información disponible en esta página.",
+section2:"Propiedad intelectual", text2:"Todos los textos, gráficos, logotipos, imágenes y otros materiales presentes en este sitio son propiedad del autor o de terceros que han autorizado su uso. Está prohibida la reproducción total o parcial sin permiso explícito.",
+section3:"Limitación de responsabilidad", text3:"No garantizamos que el sitio esté libre de errores, virus o interrupciones. En ningún caso seremos responsables de daños directos, indirectos o consecuentes derivados del uso del sitio.",
+section4:"Modificaciones", text4:"Nos reservamos el derecho de modificar, suspender o interrumpir temporal o permanentemente el sitio web, así como sus términos de uso, sin previo aviso.",
+section5:"Ley aplicable", text5:"Estos términos se rigen por la legislación vigente en tu país. Cualquier disputa será resuelta en los tribunales competentes.",
+section6:"Contacto", text6:"Si tienes dudas sobre estos términos de uso, puedes contactarnos a través de nuestro correo electrónico info@website.com o mediante nuestro formulario de contacto.",
+modalTitle:"Configuración", labelIdioma:"Cambiar idioma:", closeModalBtn:"Cerrar"
+},
+en:{
+titlePage:"Terms of Use",
+introText:"Welcome to our website. By accessing or using this site, you agree to comply with the following terms and conditions. Please read carefully.",
+section1:"Use of the Site", text1:"The content of this website is provided for informational and entertainment purposes only. We are not responsible for how you use the information on this page.",
+section2:"Intellectual Property", text2:"All texts, graphics, logos, images, and other materials on this site are owned by the author or third parties who have authorized their use. Total or partial reproduction without explicit permission is prohibited.",
+section3:"Limitation of Liability", text3:"We do not guarantee that the site is free from errors, viruses, or interruptions. Under no circumstances shall we be liable for direct, indirect, or consequential damages arising from the use of the site.",
+section4:"Modifications", text4:"We reserve the right to modify, suspend, or permanently discontinue the website and its terms of use without prior notice.",
+section5:"Governing Law", text5:"These terms are governed by the applicable laws in your country. Any dispute will be resolved in the competent courts.",
+section6:"Contact", text6:"If you have questions about these terms of use, you can contact us via email at info@website.com or through our contact form.",
+modalTitle:"Settings", labelIdioma:"Change Language:", closeModalBtn:"Close"
+},
+fr:{
+titlePage:"Conditions d'utilisation",
+introText:"Bienvenue sur notre site. En accédant ou en utilisant ce site, vous acceptez de respecter les conditions suivantes. Veuillez les lire attentivement.",
+section1:"Utilisation du site", text1:"Le contenu de ce site est fourni à des fins d'information et de divertissement uniquement. Nous ne sommes pas responsables de la façon dont vous utilisez les informations disponibles sur cette page.",
+section2:"Propriété intellectuelle", text2:"Tous les textes, graphiques, logos, images et autres matériaux présents sur ce site sont la propriété de l'auteur ou de tiers ayant autorisé leur utilisation. Toute reproduction totale ou partielle sans autorisation explicite est interdite.",
+section3:"Limitation de responsabilité", text3:"Nous ne garantissons pas que le site soit exempt d'erreurs, de virus ou d'interruptions. En aucun cas, nous ne serons responsables des dommages directs, indirects ou consécutifs résultant de l'utilisation du site.",
+section4:"Modifications", text4:"Nous nous réservons le droit de modifier, suspendre ou interrompre temporairement ou définitivement le site Web et ses conditions d'utilisation, sans préavis.",
+section5:"Droit applicable", text5:"Ces conditions sont régies par la législation en vigueur dans votre pays. Tout litige sera résolu devant les tribunaux compétents.",
+section6:"Contact", text6:"Si vous avez des questions concernant ces conditions d'utilisation, vous pouvez nous contacter par e-mail à info@website.com ou via notre formulaire de contact.",
+modalTitle:"Paramètres", labelIdioma:"Changer la langue:", closeModalBtn:"Fermer"
+}
+};
+
+document.addEventListener("DOMContentLoaded",()=>{
+    const idiomaSelect=document.getElementById("idiomaSelect");
+    const modoCheck=document.getElementById("modoOscuroCheck");
+    const modal=document.getElementById("modal");
+    const configBtn=document.getElementById("configBtn");
+    const closeModalBtn=document.getElementById("closeModalBtn");
+    let idioma=localStorage.getItem("idioma")||"es";
+    let darkMode=localStorage.getItem("darkMode")==="true";
+
+    function aplicarIdioma(){
+        const t=texts[idioma];
+        for(let key in t){
+            if(document.getElementById(key)) document.getElementById(key).textContent=t[key];
+        }
+    }
+
+    aplicarIdioma();
+    idiomaSelect.value=idioma;
+    modoCheck.checked=darkMode;
+    if(darkMode) document.body.classList.add("dark");
+
+    idiomaSelect.onchange=()=>{idioma=idiomaSelect.value; localStorage.setItem("idioma",idioma); aplicarIdioma();}
+    modoCheck.onchange=()=>{document.body.classList.toggle("dark"); localStorage.setItem("darkMode",modoCheck.checked);}
+    configBtn.onclick=()=>modal.style.display="flex";
+    closeModalBtn.onclick=()=>modal.style.display="none";
+    window.onclick=e=>{if(e.target===modal) modal.style.display="none";}
+});
+</script>
+
+</body>
+</html>

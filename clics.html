@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AutoClickerNow - Ratón Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+    --bg:#ffffff; --card:#ffffff; --text:#222; --primary:#4f46e5;
+    --header-footer:#D8CFC0; --time-green:#28a745; --time-green-dark:#19692c;
+    --click-zone-bg:#e0e0e0; --click-zone-active:#c0c0c0;
+}
+.dark {
+    --bg:#121212; --card:#1e1e1e; --text:#f5f5f5; --primary:#818cf8;
+    --header-footer:#333; --time-green:#28a745; --time-green-dark:#19692c;
+    --click-zone-bg:#2a2a2a; --click-zone-active:#444;
+}
+body{margin:0;font-family:"Poppins",sans-serif;background:var(--bg);color:var(--text);transition:0.3s;}
+header{background:var(--header-footer);display:flex;justify-content:space-between;align-items:center;padding:15px 30px;box-shadow:0 4px 6px rgba(0,0,0,0.1);}
+header .logo{font-size:22px;font-weight:700;margin-right:15px;cursor:default;}
+header .nav-buttons button{margin:0 5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:var(--primary);color:white;transition:0.2s;font-size:16px;}
+header .nav-buttons button:hover{transform:scale(1.05);}
+.nav-style-btn{margin:0 5px;padding:10px 16px;border:none;border-radius:8px;cursor:pointer;font-weight:600;background:var(--primary);color:white;transition:0.2s;font-size:16px;}
+.nav-style-btn:hover{transform:scale(1.05);}
+.container{width:90%;max-width:1300px;margin:20px auto;}
+.title{font-size:28px;font-weight:700;text-align:center;margin-bottom:10px;}
+.description{text-align:center;opacity:0.85;margin-bottom:20px;}
+.main-content{display:flex;justify-content:center;align-items:flex-start;gap:30px;flex-wrap:wrap;}
+.left-panel{flex:1;min-width:500px;display:flex;flex-direction:column;align-items:center;}
+.right-panel{width:200px;background:var(--time-green-dark);border-radius:20px;padding:20px;color:white;text-align:center;}
+.right-panel h3{margin-top:0;margin-bottom:15px;}
+.time-table td{padding:12px;text-align:center;font-weight:600;cursor:pointer;background:var(--time-green);transition:0.3s;border-radius:12px;}
+.time-table td:hover{background:var(--time-green-dark);transform:scale(1.05);}
+.time-table td.active{background:var(--primary);}
+.stats-table{border-collapse:collapse;width:100%;max-width:550px;margin:0 auto 20px;}
+.stats-table th,.stats-table td{border:1px solid #ccc;padding:10px;text-align:center;border-radius:8px;}
+.stats-table th{background:#79C3F5;color:white;}
+.click-zone{width:600px;height:300px;background:var(--click-zone-bg);border-radius:30px;display:flex;justify-content:center;align-items:center;cursor:pointer;font-size:28px;font-weight:700;text-align:center;transition:0.2s;user-select:none;margin-bottom:20px;}
+.click-zone:active{background:var(--click-zone-active);}
+.leaderboard{margin-top:20px;width:100%;max-width:650px;border-radius:15px;overflow:hidden;box-shadow:0 4px 15px rgba(0,0,0,0.1);text-align:center;}
+.leaderboard h3{background:var(--primary);color:white;margin:0;padding:12px;}
+.leaderboard-table{width:100%;border-collapse:collapse;}
+.leaderboard-table th,.leaderboard-table td{border:1px solid #ccc;padding:10px;text-align:center;}
+button#downloadBtn, button#clearBtn, button#resetBtn{margin-top:10px;padding:10px 25px;font-size:16px;border:none;border-radius:12px;cursor:pointer;transition:0.2s;}
+#downloadBtn{background:#28a745;color:white;}
+#clearBtn{background:#e63946;color:white;}
+#resetBtn{background:var(--primary);color:white;display:none;}
+button:hover{transform:scale(1.05);}
+.cps-info{max-width:900px;margin:30px auto;background:var(--card);border-radius:15px;padding:20px;box-shadow:0 4px 12px rgba(0,0,0,0.1);}
+.cps-info h3{margin-top:0;color:var(--primary);}
+footer{background:var(--header-footer);display:flex;justify-content:center;gap:15px;padding:12px 0;font-size:14px;}
+footer a{text-decoration:none;color:var(--text);}
+footer a:hover{text-decoration:underline;}
+.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.5);justify-content:center;align-items:center;z-index:1000;}
+.modal-content{background:var(--bg);padding:40px;border-radius:20px;width:450px;text-align:center;box-shadow:0 8px 25px rgba(0,0,0,0.2);}
+
+/* Estilos adicionales para mejorar la accesibilidad en móviles */
+.click-zone {
+    width: 80%; /* Ajuste para pantallas más pequeñas */
+    max-width: 600px; /* Máximo ancho para pantallas más grandes */
+    height: 200px; /* Ajuste de altura */
+    font-size: 24px; /* Ajuste de tamaño de fuente */
+}
+
+.nav-buttons button, .nav-style-btn {
+    padding: 8px 12px; /* Reduce el padding para pantallas más pequeñas */
+    font-size: 14px; /* Reduce el tamaño de la fuente */
+}
+</style>
+</head>
+<body>
+
+<header>
+<div style="display:flex;align-items:center;">
+  <div class="logo">AutoClickerNow</div>
+  <div class="nav-buttons">
+    <button onclick="location.href='clics.html'">Ratón Test</button>
+    <button onclick="location.href='contador.html'">Contador de botones</button>
+    <button onclick="location.href='espaciador.html'">Barra Espaciadora</button>
+  </div>
+</div>
+<div>
+  <button id="configBtn" class="nav-style-btn">⚙️ Configuración</button>
+</div>
+</header>
+
+<div class="container">
+  <div class="title" id="titlePage">AutoClickerNow - Ratón Test</div>
+  <div class="description" id="descPage">Mide tus clics por segundo de manera precisa</div>
+
+  <div class="main-content">
+    <div class="left-panel">
+      <table class="stats-table">
+        <tr><th id="thClicks">Clicks</th><th id="thCPS">CPS</th><th id="thTime">Tiempo</th></tr>
+        <tr><td id="clicks">0</td><td id="cps">0</td><td id="tiempo">0</td></tr>
+      </table>
+
+      <div class="click-zone" id="clickZone">Pulse aquí para empezar</div>
+
+      <div class="leaderboard">
+        <h3 id="lbTitle">Tus Registros</h3>
+        <table class="leaderboard-table" id="leaderboardTable">
+          <tr><th>Clicks</th><th>CPS</th><th>Tiempo</th></tr>
+        </table>
+        <button id="downloadBtn">Descargar tu lista</button>
+        <button id="clearBtn">Borrar historial</button>
+      </div>
+
+      <button id="resetBtn">Comenzar de nuevo</button>
+    </div>
+
+    <div class="right-panel">
+      <h3 id="timesTitle">Tiempos</h3>
+      <table class="time-table" id="timeTable">
+        <tr><td data-time="5">5 SEGUNDOS</td></tr>
+        <tr><td data-time="10">10 SEGUNDOS</td></tr>
+        <tr><td data-time="15">15 SEGUNDOS</td></tr>
+        <tr><td data-time="30">30 SEGUNDOS</td></tr>
+        <tr><td data-time="60">60 SEGUNDOS</td></tr>
+        <tr><td data-time="100">100 SEGUNDOS</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cps-info">
+    <h3 id="infoTitle1">¿Qué es una prueba de CPS (Click Speed Test)?</h3>
+    <p id="infoText1">Una prueba de CPS mide el número de clics que un usuario puede hacer con su ratón en un tiempo determinado. Es divertido y adictivo, y mide tu rapidez de clic.</p>
+
+    <h3 id="infoTitle2">Cómo usar la prueba CPS</h3>
+    <ol>
+      <li id="infoStep1">Ajuste su tiempo: Por defecto 5 segundos.</li>
+      <li id="infoStep2">Pulse tan rápido como pueda en la casilla «Pulse aquí para empezar» hasta que el contador llegue a cero.</li>
+      <li id="infoStep3">Vea su puntuación: Al terminar, se mostrará automáticamente su CPS.</li>
+      <li id="infoStep4">Vuelva a intentarlo con «Comenzar de nuevo» para mejorar su marca.</li>
+    </ol>
+
+    <h3 id="infoTitle3">¿Para qué sirve?</h3>
+    <p id="infoText3">
+      Este test sirve para medir tu rapidez de reflejos y coordinación mano-ojo, útil en diferentes géneros de videojuegos como luchas, shooters, PvP, juegos de estrategia en tiempo real y más. 
+      Te permite evaluar cómo reaccionas bajo presión, mejorar tu velocidad de clic y competir con tus amigos para aumentar tu rendimiento en juegos que requieren reflejos rápidos.
+    </p>
+  </div>
+</div>
+
+<footer>
+  <span>© SebasYin</span>
+  <a href="terminos.html">Términos de uso</a>
+  <a href="privacidad.html">Política de privacidad</a>
+</footer>
+
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modalTitle">Configuración</h2>
+    <label for="idiomaSelect" id="labelIdioma">Cambiar idioma:</label>
+    <select id="idiomaSelect">
+      <option value="es">Español</option>
+      <option value="en">English</option>
+      <option value="fr">Français</option>
+    </select>
+    <label>
+      <input type="checkbox" id="modoOscuroCheck"> Modo oscuro
+    </label>
+    <button id="closeModalBtn">Cerrar</button>
+  </div>
+</div>
+
+<script>
+// =================== Traducción y configuración ===================
+const texts={
+es:{titlePage:"AutoClickerNow - Ratón Test",descPage:"Mide tus clics por segundo de manera precisa",
+thClicks:"Clicks",thCPS:"CPS",thTime:"Tiempo",
+lbTitle:"Tus Registros",downloadBtn:"Descargar tu lista",clearBtn:"Borrar historial",resetBtn:"Comenzar de nuevo",
+timesTitle:"Tiempos",clickZone:"Pulse aquí para empezar",
+infoTitle1:"¿Qué es una prueba de CPS (Click Speed Test)?",
+infoText1:"Una prueba de CPS mide el número de clics que un usuario puede hacer con su ratón en un tiempo determinado. Es divertido y adictivo, y mide tu rapidez de clic.",
+infoTitle2:"Cómo usar la prueba CPS",
+infoStep1:"Ajuste su tiempo: Por defecto 5 segundos.",
+infoStep2:"Pulse tan rápido como pueda en la casilla «Pulse aquí para empezar» hasta que el contador llegue a cero.",
+infoStep3:"Vea su puntuación: Al terminar, se mostrará automáticamente su CPS.",
+infoStep4:"Vuelva a intentarlo con «Comenzar de nuevo» para mejorar su marca.",
+infoTitle3:"¿Para qué sirve?",
+infoText3:"Este test sirve para medir tu rapidez de reflejos y coordinación mano-ojo, útil en diferentes géneros de videojuegos como luchas, shooters, PvP, juegos de estrategia en tiempo real y más. Te permite evaluar cómo reaccionas bajo presión, mejorar tu velocidad de clic y competir con tus amigos para aumentar tu rendimiento en juegos que requieren reflejos rápidos.",
+modalTitle:"Configuración",labelIdioma:"Cambiar idioma:",closeModalBtn:"Cerrar"},
+en:{titlePage:"AutoClickerNow - Mouse Test",descPage:"Measure your clicks per second accurately",
+thClicks:"Clicks",thCPS:"CPS",thTime:"Time",
+lbTitle:"Your Records",downloadBtn:"Download your list",clearBtn:"Clear history",resetBtn:"Restart",
+timesTitle:"Times",clickZone:"Click here to start",
+infoTitle1:"What is a CPS Test?",
+infoText1:"A CPS test measures how many clicks a user can make with their mouse in a given time. It's fun, addictive, and measures your clicking speed.",
+infoTitle2:"How to use the CPS test",
+infoStep1:"Set your time: Default is 5 seconds.",
+infoStep2:"Click as fast as possible in the 'Click here to start' box until the counter reaches zero.",
+infoStep3:"View your score: At the end, it will automatically show your CPS.",
+infoStep4:"Try again with 'Restart' to improve your score.",
+infoTitle3:"What is it for?",
+infoText3:"This test helps measure your reflex speed and hand-eye coordination, useful in various game genres such as fighting games, shooters, PvP, real-time strategy and more. It lets you evaluate your reaction under pressure, improve your clicking speed, and compete with friends to enhance your performance in games that require quick reflexes.",
+modalTitle:"Settings",labelIdioma:"Change Language:",closeModalBtn:"Close"},
+fr:{titlePage:"AutoClickerNow - Test Souris",descPage:"Mesurez vos clics par seconde avec précision",
+thClicks:"Clics",thCPS:"CPS",thTime:"Temps",
+lbTitle:"Vos enregistrements",downloadBtn:"Télécharger la liste",clearBtn:"Effacer l'historique",resetBtn:"Recommencer",
+timesTitle:"Temps",clickZone:"Cliquez ici pour commencer",
+infoTitle1:"Qu'est-ce qu'un test CPS?",
+infoText1:"Un test CPS mesure combien de clics un utilisateur peut effectuer avec sa souris dans un temps donné. C'est amusant, addictif et mesure votre rapidité de clic.",
+infoTitle2:"Comment utiliser le test CPS",
+infoStep1:"Réglez votre temps : Par défaut 5 secondes.",
+infoStep2:"Cliquez aussi vite que possible dans la boîte 'Cliquez ici pour commencer' jusqu'à ce que le compteur atteigne zéro.",
+infoStep3:"Voir votre score : À la fin, il affichera automatiquement votre CPS.",
+infoStep4:"Réessayez avec 'Recommencer' pour améliorer votre score.",
+infoTitle3:"À quoi ça sert ?",
+infoText3:"Ce test permet de mesurer votre rapidité de réflexes et votre coordination œil-main, utile dans différents genres de jeux comme les jeux de combat, shooters, PvP, stratégie en temps réel et plus. Il vous permet d'évaluer votre réaction sous pression, d'améliorer votre vitesse de clic et de rivaliser avec vos amis pour améliorer vos performances dans les jeux nécessitant des réflexes rapides.",
+modalTitle:"Paramètres",labelIdioma:"Changer la langue:",closeModalBtn:"Fermer"}};
+
+document.addEventListener("DOMContentLoaded",()=>{
+const idiomaSelect=document.getElementById("idiomaSelect");
+const modoCheck=document.getElementById("modoOscuroCheck");
+const modal=document.getElementById("modal");
+const configBtn=document.getElementById("configBtn");
+const closeModalBtn=document.getElementById("closeModalBtn");
+let idioma=localStorage.getItem("idioma")||"es";
+let darkMode=localStorage.getItem("darkMode")==="true";
+function aplicarIdioma(){const t=texts[idioma];for(let k in t){let e=document.getElementById(k);if(e)e.textContent=t[k];}}
+aplicarIdioma();
+idiomaSelect.value=idioma;modoCheck.checked=darkMode;if(darkMode)document.body.classList.add("dark");
+idiomaSelect.onchange=()=>{idioma=idiomaSelect.value;localStorage.setItem("idioma",idioma);aplicarIdioma();}
+modoCheck.onchange=()=>{document.body.classList.toggle("dark");localStorage.setItem("darkMode",modoCheck.checked);}
+configBtn.onclick=()=>modal.style.display="flex";
+closeModalBtn.onclick=()=>modal.style.display="none";
+window.onclick=e=>{if(e.target===modal)modal.style.display="none";}
+});
+
+// =================== Lógica CPS ===================
+document.addEventListener("DOMContentLoaded",()=>{
+let clicks=0,cps=0,elapsed=0,duration=5,interval;
+const clickZone=document.getElementById("clickZone");
+const clicksDisplay=document.getElementById("clicks");
+const cpsDisplay=document.getElementById("cps");
+const tiempoDisplay=document.getElementById("tiempo");
+const resetBtn=document.getElementById("resetBtn");
+const leaderboardTable=document.getElementById("leaderboardTable");
+const downloadBtn=document.getElementById("downloadBtn");
+const clearBtn=document.getElementById("clearBtn");
+function getText(k){return texts[localStorage.getItem("idioma")||"es"][k];}
+const timeCells=document.querySelectorAll("#timeTable td");
+timeCells.forEach(c=>c.onclick=()=>{duration=parseInt(c.dataset.time);timeCells.forEach(tc=>tc.classList.remove("active"));c.classList.add("active");});
+timeCells[0].classList.add("active");
+let savedRecords=JSON.parse(localStorage.getItem("cpsRecords")||"[]");
+function render(){leaderboardTable.innerHTML="<tr><th>Clicks</th><th>CPS</th><th>Tiempo</th></tr>";savedRecords.forEach(r=>{const row=leaderboardTable.insertRow();row.insertCell(0).textContent=r.clicks;row.insertCell(1).textContent=r.cps;row.insertCell(2).textContent=r.time;});}
+render();
+
+function resetTest() {
+    clicks = 0;
+    cps = 0;
+    elapsed = 0;
+    clearInterval(interval);
+    clicksDisplay.textContent = 0;
+    cpsDisplay.textContent = 0;
+    tiempoDisplay.textContent = 0;
+    clickZone.textContent = getText("clickZone");
+    resetBtn.style.display = "none";
+}
+
+function startTest() {
+    interval = setInterval(() => {
+        elapsed += 0.1;
+        tiempoDisplay.textContent = elapsed.toFixed(1);
+        cps = (clicks / elapsed).toFixed(2);
+        clicksDisplay.textContent = clicks;
+        cpsDisplay.textContent = cps;
+        if (elapsed >= duration) {
+            clearInterval(interval);
+            clickZone.textContent = "Tiempo terminado!";
+            resetBtn.style.display = "block";
+            const r = { clicks: clicks, cps: cps, time: duration };
+            savedRecords.push(r);
+            localStorage.setItem("cpsRecords", JSON.stringify(savedRecords));
+            render();
+        }
+    }, 100);
+}
+
+// Eventos táctiles
+clickZone.addEventListener("touchstart", (e) => {
+    e.preventDefault(); // Evita el comportamiento predeterminado del toque
+    if (elapsed === 0) startTest();
+    if (elapsed < duration) {
+        clicks++;
+        clickZone.classList.add("click-zone-active");
+    }
+});
+
+clickZone.addEventListener("touchend", () => {
+    clickZone.classList.remove("click-zone-active");
+    setTimeout(() => clickZone.classList.remove("click-zone-active"), 100);
+});
+
+// Evento de clic para escritorio (opcional, mantener para compatibilidad)
+clickZone.addEventListener("click", () => {
+    if (elapsed === 0) startTest();
+    if (elapsed < duration) {
+        clicks++;
+        clickZone.classList.add("click-zone-active");
+        setTimeout(() => clickZone.classList.remove("click-zone-active"), 100);
+    }
+});
+
+
+resetBtn.onclick = resetTest;
+
+downloadBtn.onclick = () => {
+    let csv = "data:text/csv;charset=utf-8,Clicks,CPS,Tiempo\n";
+    savedRecords.forEach(r => csv += `${r.clicks},${r.cps},${r.time}\n`);
+    const link = document.createElement("a");
+    link.href = encodeURI(csv);
+    link.download = "registros_cps.csv";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+};
+
+clearBtn.onclick = () => {
+    if (confirm("¿Seguro que deseas borrar todo el historial?")) {
+        savedRecords = [];
+        localStorage.removeItem("cpsRecords");
+        render();
+    }
+};
+});
+</script>
+
+</body>
+</html>
